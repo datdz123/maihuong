@@ -293,26 +293,31 @@ const fetchData = () => {
       });
     });
 };
-// Chức năng điều khiển âm nhạc
+// Chức năng điều khiển âm nhạc với popup
 const initMusicControl = () => {
   const musicToggle = document.getElementById('musicToggle');
   const backgroundMusic = document.getElementById('backgroundMusic');
   const musicControl = document.querySelector('.music-control');
+  const musicPopup = document.getElementById('musicPopup');
+  const mainContainer = document.getElementById('mainContainer');
+  const btnYes = document.getElementById('btnYes');
+  const btnNo = document.getElementById('btnNo');
   
   let isMuted = false;
+  let userChoice = null;
+  
+  // Ẩn icon loa ban đầu
+  musicControl.style.display = 'none';
   
   // Hàm để bật nhạc
   const playMusic = () => {
     backgroundMusic.play().then(() => {
-      console.log('Nhạc đang phát');
+      console.log('Nhạc đang phát thành công');
+      isMuted = false;
+      musicToggle.className = 'fas fa-volume-up';
+      musicControl.classList.remove('muted');
     }).catch(error => {
-      console.log('Không thể tự động phát nhạc:', error);
-      // Thử phát nhạc khi user tương tác
-      document.addEventListener('click', () => {
-        backgroundMusic.play().catch(err => {
-          console.log('Vẫn không thể phát nhạc:', err);
-        });
-      }, { once: true });
+      console.log('Không thể phát nhạc:', error);
     });
   };
   
@@ -320,25 +325,48 @@ const initMusicControl = () => {
   const pauseMusic = () => {
     backgroundMusic.pause();
     console.log('Nhạc đã tắt');
+    isMuted = true;
+    musicToggle.className = 'fas fa-volume-mute';
+    musicControl.classList.add('muted');
   };
   
-  // Bắt đầu phát nhạc khi trang load
-  playMusic();
+  // Hàm để bắt đầu hiển thị nội dung chính
+  const startMainContent = () => {
+    // Ẩn popup
+    musicPopup.style.display = 'none';
+    
+    // Hiển thị nội dung chính
+    mainContainer.style.display = 'block';
+    
+    // Hiển thị icon loa
+    musicControl.style.display = 'flex';
+    
+    // Bắt đầu animation
+    animationTimeline();
+  };
   
-  // Xử lý sự kiện click vào icon loa
+  // Xử lý khi user chọn "Có, bật nhạc"
+  btnYes.addEventListener('click', () => {
+    userChoice = 'yes';
+    playMusic();
+    startMainContent();
+  });
+  
+  // Xử lý khi user chọn "Không, tắt nhạc"
+  btnNo.addEventListener('click', () => {
+    userChoice = 'no';
+    isMuted = true;
+    startMainContent();
+  });
+  
+  // Xử lý sự kiện click vào icon loa (sau khi đã vào nội dung chính)
   musicToggle.addEventListener('click', () => {
     if (isMuted) {
       // Bật nhạc
       playMusic();
-      musicToggle.className = 'fas fa-volume-up';
-      musicControl.classList.remove('muted');
-      isMuted = false;
     } else {
       // Tắt nhạc
       pauseMusic();
-      musicToggle.className = 'fas fa-volume-mute';
-      musicControl.classList.add('muted');
-      isMuted = true;
     }
   });
   
@@ -353,18 +381,6 @@ const initMusicControl = () => {
   backgroundMusic.addEventListener('error', (error) => {
     console.log('Lỗi phát nhạc:', error);
   });
-  
-  // Thêm sự kiện để phát nhạc khi user tương tác lần đầu
-  const startMusicOnInteraction = () => {
-    if (backgroundMusic.paused && !isMuted) {
-      playMusic();
-    }
-    document.removeEventListener('click', startMusicOnInteraction);
-    document.removeEventListener('keydown', startMusicOnInteraction);
-  };
-  
-  document.addEventListener('click', startMusicOnInteraction);
-  document.addEventListener('keydown', startMusicOnInteraction);
 };
 
 // Run fetch and animation in sequence
@@ -376,5 +392,6 @@ const resolveFetch = () => {
   });
 };
 
-resolveFetch().then(animationTimeline());
+// Chỉ chạy fetch data, không chạy animation ngay
+resolveFetch();
 

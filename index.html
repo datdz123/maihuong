@@ -15,9 +15,25 @@
   </head>
 
   <body>
+    <!-- Popup hỏi có muốn bật nhạc không -->
+    <div class="music-popup" id="musicPopup">
+      <div class="popup-content">
+        <div class="popup-icon">
+          <i class="fas fa-music"></i>
+        </div>
+        <h2>Bạn có muốn bật nhạc không?</h2>
+        <p>Nhạc sẽ giúp trải nghiệm thêm thú vị hơn ❤️</p>
+        <div class="popup-buttons">
+          <button class="btn-yes" id="btnYes">Có, bật nhạc</button>
+          <button class="btn-no" id="btnNo">Không, tắt nhạc</button>
+        </div>
+      </div>
+    </div>
+
     <!-- Thêm icon loa để điều khiển âm nhạc -->
     <div class="music-control">
       <i class="fas fa-volume-up" id="musicToggle"></i>
+      <div class="music-tooltip" id="musicTooltip">Click để bật nhạc</div>
     </div>
     
     <!-- Thêm audio element -->
@@ -25,7 +41,7 @@
       <source src="img/NOLOVENOLIFE-HIEUTHUHAI-11966374.mp3" type="audio/mpeg">
     </audio>
 
-    <div class="container">
+    <div class="container" id="mainContainer" style="display: none;">
       <div class="one">
         <h1 class="one">
           Hey
