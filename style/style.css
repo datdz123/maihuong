@@ -192,7 +192,7 @@ body {
 
 .container {
   height: 100vh;
-  width: 100vh;
+  width: 100vw;
   margin: 0 auto;
   text-align: center;
   visibility: hidden;
@@ -303,6 +303,12 @@ body {
   display: inline-block;
   max-width: 45%;
   height: auto;
+}
+@media screen and (min-width: 1024px) {
+  .six img {
+    height: 400px;
+    object-fit: cover;
+  }
 }
 
 .six .hat {
@@ -441,13 +447,101 @@ body {
   }
 }
 
-@media screen and (max-width: 500px) {
+/* Tablet Responsive */
+@media screen and (min-width: 768px) and (max-width: 1023px) {
   .container {
-    width: 90%;
+    width: 100vw;
+    max-width: 100vw;
+  }
+
+  .one {
+    font-size: 3.5rem;
+  }
+
+  .two {
+    font-size: 1rem;
+  }
+
+  .three {
+    font-size: 2.5rem;
+  }
+
+  .four .text-box {
+    width: 80%;
+    max-width: 500px;
+  }
+
+  .five p {
+    font-size: 1.5rem;
+  }
+
+  .idea-5 {
+    font-size: 3rem;
+  }
+
+  .idea-6 span {
+    font-size: 12rem;
+  }
+
+  .six img {
+    max-width: 40%;
+  }
+
+  .wish-hbd {
+    font-size: 2.5em;
+  }
+
+  .wish h5 {
+    font-size: 1.6rem;
+  }
+
+  .nine p {
+    font-size: 1.8rem;
+  }
+
+  /* Popup responsive cho tablet */
+  .popup-content {
+    padding: 30px;
+    max-width: 350px;
+  }
+
+  .popup-content h2 {
+    font-size: 20px;
+  }
+
+  .popup-content p {
+    font-size: 14px;
+  }
+
+  .btn-yes, .btn-no {
+    padding: 10px 20px;
+    font-size: 14px;
+    min-width: 100px;
+  }
+}
+
+/* Mobile Responsive */
+@media screen and (max-width: 767px) {
+  .container {
+    width: 100vw;
+    max-width: 100vw;
+  }
+
+  .one {
+    font-size: 2.5rem;
+  }
+
+  .two {
+    font-size: 0.9rem;
+  }
+
+  .three {
+    font-size: 2rem;
   }
 
   .four .text-box {
     width: 90%;
+    margin: 0 auto;
   }
 
   .text-box .fake-btn {
@@ -455,12 +549,24 @@ body {
     bottom: -38px;
   }
 
+  .five p {
+    font-size: 1.2rem;
+  }
+
   .idea-5 span {
     display: block;
   }
 
+  .idea-5 {
+    font-size: 2.5rem;
+  }
+
   .idea-6 span {
-    font-size: 10rem;
+    font-size: 8rem;
+  }
+
+  .six img {
+    max-width: 45%;
   }
 
   .six .hat {
@@ -469,15 +575,76 @@ body {
   }
 
   .wish-hbd {
-    font-size: 2.3em;
+    font-size: 1.8em;
   }
 
   .wish h5 {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
   }
 
   .nine p {
+    font-size: 1.3rem;
+  }
+
+  /* Popup responsive cho mobile */
+  .popup-content {
+    padding: 25px;
+    max-width: 300px;
+    width: 85%;
+  }
+
+  .popup-content h2 {
+    font-size: 18px;
+  }
+
+  .popup-content p {
+    font-size: 13px;
+  }
+
+  .popup-buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .btn-yes, .btn-no {
+    padding: 12px 20px;
+    font-size: 14px;
+    min-width: 120px;
+  }
+
+  /* Music control responsive */
+  .music-control {
+    top: 15px;
+    right: 15px;
+    width: 45px;
+    height: 45px;
+  }
+
+  .music-control i {
+    font-size: 20px;
+  }
+}
+
+/* Small Mobile */
+@media screen and (max-width: 480px) {
+  .one {
+    font-size: 2rem;
+  }
+
+  .three {
     font-size: 1.5rem;
-    font-weight: lighter;
+  }
+
+  .idea-6 span {
+    font-size: 6rem;
+  }
+
+  .wish-hbd {
+    font-size: 1.5em;
+  }
+
+  .popup-content {
+    padding: 20px;
+    max-width: 280px;
   }
 }
